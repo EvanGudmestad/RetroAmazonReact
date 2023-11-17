@@ -1,6 +1,8 @@
 import {useState} from 'react';
 import axios from 'axios';
-export default function LoginForm(){
+import {useNavigate} from 'react-router-dom';
+
+export default function LoginForm({setFullName}){
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [error, setError] = useState('');
@@ -11,7 +13,8 @@ export default function LoginForm(){
     const passwordError = !password ? 'Password is required' :
     password.length < 8 ? 'Password must be at least 8 characters' : '';
     
-    
+    const navigate = useNavigate();
+
     function onSubmitLogin(evt){
         setError('');
         evt.preventDefault();
@@ -28,9 +31,23 @@ export default function LoginForm(){
             withCredentials: true
         }).then(response => {
             console.log(response.data);
-          //  onLogin(auth);
+            localStorage.setItem('fullName',response.data.fullName);
+            setFullName(response.data.fullName);
+            navigate('/');
+         
         }).catch(error => {
-            console.log(error);
+            
+           // console.log(error.response);
+            const resError = error?.response?.data;
+
+            if(resError){
+                //Bad Username or password
+                if(typeof resError === 'string'){
+                    setError(error.response.data);
+                }else if(resError.error.details){ //joi validation errors
+                    setError(resError.error.details[0].message); //map each error to display all errors
+                }
+            }
         });
     }
     

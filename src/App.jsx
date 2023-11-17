@@ -7,18 +7,26 @@ import BookList from './components/BookList'
 import LoginForm from './components/LoginForm'
 
 function App() {
- 
+  
+  const [fullName, setFullName] = useState("");
+
+  useEffect(() => {
+    const fullName = localStorage.getItem('fullName');
+    if(fullName){
+      setFullName(fullName);
+    }
+  }, []);
 
   return (
     <>
     <div className='container d-flex flex-column min-vh-100'>
       <header>
-        <NavBar />
+        <NavBar fullName={fullName} setFullName={setFullName}  />
       </header>
       <main className='flex-grow-1'>
         <Routes>
           <Route path='/' element={<BookList />} />
-          <Route path='/login' element={<LoginForm />} />
+          <Route path='/login' element={<LoginForm setFullName={setFullName}/>} />
           <Route path='/contact' element={<h1>Contact</h1>} />
         </Routes>
       </main>
