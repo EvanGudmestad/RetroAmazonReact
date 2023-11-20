@@ -25,7 +25,7 @@ export default function LoginForm({setFullName}){
             setError(passwordError);
             return;
         }
-        axios.post('http://localhost:3003/api/users/login', {
+        axios.post(`${import.meta.env.VITE_API_URL}/api/users/login`, {
               email,password
         },{
             withCredentials: true

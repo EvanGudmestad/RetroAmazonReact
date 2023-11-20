@@ -8,7 +8,7 @@ export default function NavBar({fullName, setFullName}){
     function onClickLogout(evt){
         evt.preventDefault();
 
-        axios.post('http://localhost:3003/api/users/logout',{},{withCredentials: true})
+        axios.post(`${import.meta.env.VITE_API_URL}/api/users/logout`,{},{withCredentials: true})
         .then(response => {
             setFullName('');
             localStorage.removeItem('fullName');

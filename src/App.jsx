@@ -5,6 +5,8 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 import NavBar from './components/NavBar'
 import BookList from './components/BookList'
 import LoginForm from './components/LoginForm'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   
@@ -17,6 +19,13 @@ function App() {
     }
   }, []);
 
+  function showToast(message, type){
+    toast(message, {
+      type: type,
+      position: 'bottom-right'
+    });
+  }
+
   return (
     <>
     <div className='container d-flex flex-column min-vh-100'>
@@ -24,8 +33,9 @@ function App() {
         <NavBar fullName={fullName} setFullName={setFullName}  />
       </header>
       <main className='flex-grow-1'>
+        <ToastContainer />
         <Routes>
-          <Route path='/' element={<BookList />} />
+          <Route path='/' element={<BookList showToast={showToast} />} />
           <Route path='/login' element={<LoginForm setFullName={setFullName}/>} />
           <Route path='/contact' element={<h1>Contact</h1>} />
         </Routes>
