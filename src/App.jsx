@@ -5,12 +5,14 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 import NavBar from './components/NavBar'
 import BookList from './components/BookList'
 import LoginForm from './components/LoginForm'
+import BookEditor from './components/BookEditor'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   
   const [fullName, setFullName] = useState("");
+  const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
     const fullName = localStorage.getItem('fullName');
@@ -35,9 +37,10 @@ function App() {
       <main className='flex-grow-1'>
         <ToastContainer />
         <Routes>
-          <Route path='/' element={<BookList showToast={showToast} />} />
-          <Route path='/login' element={<LoginForm setFullName={setFullName}/>} />
+          <Route path='/' element={<BookList showToast={showToast} userRole={userRole} />} />
+          <Route path='/login' element={<LoginForm setFullName={setFullName} setUserRole={setUserRole}/>} />
           <Route path='/contact' element={<h1>Contact</h1>} />
+          <Route path="/books/update/:bookId" element={<BookEditor showToast={showToast} />} />
         </Routes>
       </main>
       <footer>
