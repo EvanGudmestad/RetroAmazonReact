@@ -6,6 +6,7 @@ import NavBar from './components/NavBar'
 import BookList from './components/BookList'
 import LoginForm from './components/LoginForm'
 import BookEditor from './components/BookEditor'
+import RegisterUserForm from './components/RegisterUserForm'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -39,6 +40,7 @@ function App() {
         <Routes>
           <Route path='/' element={<BookList showToast={showToast} userRole={userRole} />} />
           <Route path='/login' element={<LoginForm setFullName={setFullName} setUserRole={setUserRole}/>} />
+          <Route path='/register' element={<RegisterUserForm showToast={showToast} setFullName={setFullName} setUserRole={setUserRole} />} />
           <Route path='/contact' element={<h1>Contact</h1>} />
           <Route path="/books/update/:bookId" element={<BookEditor showToast={showToast} />} />
         </Routes>
