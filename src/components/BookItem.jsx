@@ -13,7 +13,7 @@ export default function BookItem({book, onBookDelete, onBookUpdate, userRole}){
                               </div> 
                               <div className='card-footer'>
                                 <button className='btn btn-danger' onClick={(evt) => onBookDelete(evt, book._id)}>Delete</button>
-                                {userRole.includes('quality analyst') && <Link to={`/books/update/${book._id}`} className='btn btn-info'>Update</Link>}
+                                {/* {userRole.includes('quality analyst') && <Link to={`/books/update/${book._id}`} className='btn btn-info'>Update</Link>} */}
                                </div> 
                         </div>
         </div>
