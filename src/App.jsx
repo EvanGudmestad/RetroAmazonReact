@@ -17,8 +17,12 @@ function App() {
 
   useEffect(() => {
     const fullName = localStorage.getItem('fullName');
+    const userRole = localStorage.getItem('userRole');
     if(fullName){
       setFullName(fullName);
+    }
+    if(userRole){
+      setUserRole(userRole);
     }
   }, []);
 

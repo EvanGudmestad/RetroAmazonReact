@@ -32,6 +32,7 @@ export default function LoginForm({setFullName, setUserRole}){
         }).then(response => {
             console.log(response.data);
             localStorage.setItem('fullName',response.data.fullName);
+            localStorage.setItem('userRole',response.data.role);
             setUserRole(response.data.role);
             setFullName(response.data.fullName);
             navigate('/');
