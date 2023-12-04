@@ -3,7 +3,7 @@ import {NavLink} from 'react-router-dom';
 import './NavBar.css';
 import axios from 'axios';
 
-export default function NavBar({fullName, setFullName}){
+export default function NavBar({fullName, setFullName, userRole}){
 
     function onClickLogout(evt){
         evt.preventDefault();
@@ -12,6 +12,7 @@ export default function NavBar({fullName, setFullName}){
         .then(response => {
             setFullName('');
             localStorage.removeItem('fullName');
+            localStorage.removeItem('userRole');
             window.location.reload();
         }).catch(error => console.log(error));
 
@@ -24,6 +25,12 @@ export default function NavBar({fullName, setFullName}){
                 Home
               </NavLink>
             </li>
+            {userRole?.includes('developer') && 
+            <li>
+              <NavLink to='/addbook' className='nav-link'>
+                Add Book
+              </NavLink>
+            </li> }
             {!fullName &&
             <>
                 <li className='nav-item'>
@@ -57,6 +64,7 @@ export default function NavBar({fullName, setFullName}){
                 </li>
               </div>
             }
+          
           </ul>
         </nav>
     );

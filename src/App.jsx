@@ -7,6 +7,7 @@ import BookList from './components/BookList'
 import LoginForm from './components/LoginForm'
 import BookEditor from './components/BookEditor'
 import RegisterUserForm from './components/RegisterUserForm'
+import AddBook from './components/AddBook'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -37,7 +38,7 @@ function App() {
     <>
     <div className='container d-flex flex-column min-vh-100'>
       <header>
-        <NavBar fullName={fullName} setFullName={setFullName}  />
+        <NavBar fullName={fullName} userRole={userRole} setFullName={setFullName}  />
       </header>
       <main className='flex-grow-1'>
         <ToastContainer />
@@ -45,6 +46,7 @@ function App() {
           <Route path='/' element={<BookList showToast={showToast} userRole={userRole} />} />
           <Route path='/login' element={<LoginForm setFullName={setFullName} setUserRole={setUserRole}/>} />
           <Route path='/register' element={<RegisterUserForm showToast={showToast} setFullName={setFullName} setUserRole={setUserRole} />} />
+          <Route path='/addbook' element={<AddBook showToast={showToast} />} />
           <Route path='/contact' element={<h1>Contact</h1>} />
           <Route path="/books/update/:bookId" element={<BookEditor showToast={showToast} />} />
         </Routes>
