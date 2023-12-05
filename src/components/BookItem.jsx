@@ -9,7 +9,11 @@ export default function BookItem({book, onBookDelete, onBookUpdate, userRole}){
                                 {book.title}
                              </div>
                              <div className='card-body'>
-                              <p className='card-text'>{book.description}</p> 
+                                <p className='card-text'><span className="text-primary">Description: </span>{book.description}</p>
+                                <p className='card-text'><span className="text-primary">Author: </span>{book.author}</p>
+                                <p className='card-text'><span className="text-primary">Price: </span>{book.price}</p>
+                                <p className="card-text"><span className="text-primary">Genre: </span>{book.genre}</p>
+                                <p className="card-text"><span className="text-primary">Year: </span>{book.publication_year}</p>
                               </div> 
                               <div className='card-footer'>
                                 <button className='btn btn-danger' onClick={(evt) => onBookDelete(evt, book._id)}>Delete</button>
