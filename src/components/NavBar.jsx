@@ -25,7 +25,7 @@ export default function NavBar({fullName, setFullName, userRole}){
                 Home
               </NavLink>
             </li>
-            {userRole?.includes('developer') && 
+            {userRole && userRole?.includes('developer') && 
             <li>
               <NavLink to='/addbook' className='nav-link'>
                 Add Book

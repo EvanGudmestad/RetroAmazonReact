@@ -71,7 +71,7 @@ export default function AddBook({showToast}){
             formData.append('bookPic', bookPic);
         }
 
-        axios.post(`${import.meta.env.VITE_API_URL}/api/books/add`,formData,{withCredentials: true, headers: {'Content-Type': 'multipart/form-data'}})
+        axios.post(`${import.meta.env.VITE_API_URL}/api/books/add`,formData,{withCredentials: true, headers: {'Content-Type': undefined}})
         .then(response => {
             showToast(`${response.data.message}`, 'success');
             navigate('/');
