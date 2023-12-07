@@ -14,6 +14,7 @@ export default function AddBook({showToast}){
     const[price, setPrice] = useState('');
     const[description, setDescription] = useState('');
     const [error, setError] = useState('');
+    const [bookPic, setBookPic] = useState('');
 
     const navigate = useNavigate();
 
@@ -57,7 +58,20 @@ export default function AddBook({showToast}){
             return;
         }
 
-        axios.post(`${import.meta.env.VITE_API_URL}/api/books/add`,{isbn,title,author,genre,publication_year:year,price, description},{withCredentials: true})
+        const formData = new FormData();
+
+        formData.append('isbn', isbn);
+        formData.append('title', title);
+        formData.append('author', author);
+        formData.append('genre', genre);
+        formData.append('publication_year', year);
+        formData.append('price', price);
+        formData.append('description', description);
+        if(bookPic){
+            formData.append('bookPic', bookPic);
+        }
+
+        axios.post(`${import.meta.env.VITE_API_URL}/api/books/add`,formData,{withCredentials: true, headers: {'Content-Type': 'multipart/form-data'}})
         .then(response => {
             showToast(`${response.data.message}`, 'success');
             navigate('/');
@@ -69,7 +83,7 @@ export default function AddBook({showToast}){
     
 
     return (
-       <form onSubmit={(evt) => onAddBook(evt)}>
+       <form onSubmit={(evt) => onAddBook(evt)} encType="multipart/form-data">
         {/* //isbn, title,author, genre,year,price, description fields */}
         <h1>Add Book</h1>
         <div className="d-flex flex-column">
@@ -111,6 +125,11 @@ export default function AddBook({showToast}){
                 <div className="form-group col-4 mt-3">
                     <label htmlFor="description" className="form-label">Description</label>
                     <textarea className="form-control" id="description" rows="3" value={description} onChange={(evt) => setDescription(evt.target.value)}></textarea>
+                </div>
+                {/* Book Picture */}
+                <div className="form-group col-4 mt-3">
+                    <label htmlFor="bookPic" className="form-label">Book Picture</label>
+                    <input type="file" className="form-control" name="bookPic" id="bookPic" placeholder="Enter Book Picture" onChange={(evt) => setBookPic(evt.target.files[0])} />
                 </div>
                 <div className="form-group col-4 mt-3">
                     <button type="submit" className="btn btn-primary mt-3">Add Book</button>

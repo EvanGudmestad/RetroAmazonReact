@@ -7,6 +7,7 @@ export default function BookItem({book, onBookDelete, onBookUpdate, userRole}){
                        <div className='card'>
                             <div className='card-header'>
                                 {book.title}
+                                {book.imagePath && <img src={`${import.meta.env.VITE_API_URL}/${book.imagePath}`} alt={book.title} className='img-fluid' />}
                              </div>
                              <div className='card-body'>
                                 <p className='card-text'><span className="text-primary">Description: </span>{book.description}</p>
